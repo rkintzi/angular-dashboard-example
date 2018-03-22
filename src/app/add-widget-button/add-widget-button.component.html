@@ -1,0 +1,7 @@
+<div class="add-widget-button">
+    <a href="#" (click)="toggleMenu($event)">Add new Widget</a>
+    <ul *ngIf="showMenu" class="menu">
+        <li *ngFor="let item of widgetsTypes"><a href="#" (click)="add($event, item.type)">{{item.name}}</a></li>
+    </ul>
+
+</div>

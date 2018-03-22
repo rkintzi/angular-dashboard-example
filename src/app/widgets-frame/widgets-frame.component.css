@@ -1,0 +1,23 @@
+.widget-frame {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #8c8c8c;
+    position: relative;
+}
+.widget-frame .content {
+    position: absolute;
+    left:0;
+    right:0;
+    top:25px;
+    bottom:0;
+}
+.widget-frame .actions {
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    padding:3px;
+    border-bottom: 1px solid #8c8c8c;
+    text-align: right; 
+    background: #8c8c8c;
+}

@@ -1,0 +1,22 @@
+<div class="widget-frame">
+    <div *ngIf="!editMode" class="actions">
+        <a href="#" (click)="edit($event)">edit</a> |
+        <a href="#" (click)="remove($event)">remove</a>
+    </div>
+    <div *ngIf="editMode" class="actions">
+        <a href="#" (click)="cancel($event)">remove</a>
+    </div>
+    <div class="content">
+    <ng-template widget></ng-template>
+    <ng-container *ngIf="!editMode" [ngSwitch]="widget.type">
+        <table-widget *ngSwitchCase="'table'" [config]="widget.config"></table-widget>
+        <line-chart *ngSwitchCase="'line-chart'" [config]="widget.config"></line-chart>
+        <pie-chart *ngSwitchCase="'pie-chart'" [config]="widget.config"></pie-chart>
+    </ng-container>
+    <ng-container *ngIf="editMode" [ngSwitch]="widget.type">
+        <table-widget-editor *ngSwitchCase="'table'" [config]="widget.config"></table-widget-editor>
+        <line-chart-editor *ngSwitchCase="'line-chart'" [config]="widget.config"></line-chart-editor>
+        <pie-chart-editor *ngSwitchCase="'pie-chart'" [config]="widget.config"></pie-chart-editor>
+    </ng-container>
+    </div>
+</div>
