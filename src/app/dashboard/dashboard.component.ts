@@ -18,4 +18,11 @@ export class DashboardComponent implements OnInit {
         console.log(this.dashboard);
     }
 
+    addWidget(type:string) {
+        this.dashboard.widgets.push({
+            type:type,
+            config: undefined,
+        })
+    }
+
 }

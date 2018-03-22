@@ -1,10 +1,10 @@
 <div class="widget-frame">
     <div *ngIf="!editMode" class="actions">
-        <a href="#" (click)="edit($event)">edit</a> |
-        <a href="#" (click)="remove($event)">remove</a>
+        <a btn (click)="edit()">edit</a> |
+        <a btn (click)="remove()">remove</a>
     </div>
     <div *ngIf="editMode" class="actions">
-        <a href="#" (click)="cancel($event)">remove</a>
+        <a btn (click)="cancel()">cancel</a>
     </div>
     <div class="content">
     <ng-template widget></ng-template>
@@ -14,9 +14,24 @@
         <pie-chart *ngSwitchCase="'pie-chart'" [config]="widget.config"></pie-chart>
     </ng-container>
     <ng-container *ngIf="editMode" [ngSwitch]="widget.type">
-        <table-widget-editor *ngSwitchCase="'table'" [config]="widget.config"></table-widget-editor>
-        <line-chart-editor *ngSwitchCase="'line-chart'" [config]="widget.config"></line-chart-editor>
-        <pie-chart-editor *ngSwitchCase="'pie-chart'" [config]="widget.config"></pie-chart-editor>
+        <table-widget-editor 
+            *ngSwitchCase="'table'" 
+            [config]="config"
+            (save)="save($event)"
+            (cancel)="cancel()"
+        ></table-widget-editor>
+        <line-chart-editor 
+            *ngSwitchCase="'line-chart'" 
+            [config]="config"
+            (save)="save($event)"
+            (cancel)="cancel()"
+        ></line-chart-editor>
+        <pie-chart-editor
+            *ngSwitchCase="'pie-chart'"
+            [config]="config"
+            (save)="save($event)"
+            (cancel)="cancel()"
+        ></pie-chart-editor>
     </ng-container>
     </div>
 </div>

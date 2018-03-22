@@ -1,4 +1,5 @@
 <div class="editor">
-    <input [ngModel]="config.line_chart" (ngModel)="edited.line_chart = $event">
-    <input type="button" value="save" (click)="save(event)">
+    <input [(ngModel)]="config.lineChartData">
+    <input type="button" value="save" (click)="save.emit(config)">
+    <input type="button" value="cancel" (click)="cancel.emit()">
 </div>

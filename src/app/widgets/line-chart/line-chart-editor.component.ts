@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { LineChartConfig } from './line-chart.component';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'line-chart-editor',
@@ -8,22 +9,13 @@ import { LineChartConfig } from './line-chart.component';
 })
 export class LineChartEditorComponent implements OnInit {
 
-  @Input() config: LineChartConfig;
+    @Input() config: LineChartConfig;
     @Output() save = new EventEmitter<LineChartConfig>();
     @Output() cancel = new EventEmitter<void>();
-    edited: LineChartConfig;
-    constructor() { }
+
+    constructor(private service: DashboardService) { }
 
     ngOnInit() {
-        this.edited = {...this.config};
-    }
-
-    onSave($event) {
-        if (this.edited.line_chart != this.config.line_chart) {
-            this.save.emit(this.edited);
-        } else {
-            this.cancel.emit();
-        }
     }
 
 }

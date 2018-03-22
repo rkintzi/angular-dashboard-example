@@ -9,6 +9,7 @@ import { DashboardService }  from './dashboard.service';
 import { WidgetContentDirective } from './widgets-frame/widget-content.directive';
 import { WidgetsModule } from './widgets/widgets.module';
 import { AddWidgetButtonComponent } from './add-widget-button/add-widget-button.component';
+import { ButtonDirective } from './button.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AddWidgetButtonComponent } from './add-widget-button/add-widget-button.
     DashboardComponent,
     WidgetsFrameComponent,
     WidgetContentDirective,
-    AddWidgetButtonComponent
+    AddWidgetButtonComponent,
+    ButtonDirective
   ],
   imports: [
     BrowserModule,

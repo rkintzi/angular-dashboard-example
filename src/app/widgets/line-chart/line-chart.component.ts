@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Widget } from '../../dashboard.service';
 
-export interface LineChartConfig {
-    line_chart: string;
+export class LineChartConfig {
+    lineChartData: string;
 }
 
 @Component({
@@ -10,10 +11,11 @@ export interface LineChartConfig {
   styleUrls: ['./line-chart.component.css']
 })
 export class LineChartComponent implements OnInit {
-  @Input() config: LineChartConfig;
-  constructor() { }
+    @Input() config: LineChartConfig;
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

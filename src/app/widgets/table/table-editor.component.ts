@@ -11,19 +11,10 @@ export class TableEditorComponent implements OnInit {
     @Input() config: TableConfig;
     @Output() save = new EventEmitter<TableConfig>();
     @Output() cancel = new EventEmitter<void>();
-    edited: TableConfig;
     constructor() { }
 
     ngOnInit() {
-        this.edited = {...this.config};
     }
 
-    onSave($event) {
-        if (this.edited.table != this.config.table) {
-            this.save.emit(this.edited);
-        } else {
-            this.cancel.emit();
-        }
-    }
 
 }

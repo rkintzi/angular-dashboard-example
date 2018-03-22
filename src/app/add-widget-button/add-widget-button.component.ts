@@ -23,14 +23,12 @@ export class AddWidgetButtonComponent implements OnInit {
 
     ngOnInit() {
     }
-    add(evt: Event, type: string) {
+    add(type: string) {
         this.addWidget.emit(type);
         this.showMenu = false;
-        evt.preventDefault();
     }
-    toggleMenu(evt: Event) {
+    toggleMenu() {
         this.showMenu = !this.showMenu;
-        evt.preventDefault();
     }
 
 }

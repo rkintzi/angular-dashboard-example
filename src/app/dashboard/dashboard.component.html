@@ -1,4 +1,4 @@
 <div class="dashboard">
     <widgets-frame *ngFor="let w of dashboard.widgets" [widget]="w"></widgets-frame>
-    <add-widget-button></add-widget-button>
+    <add-widget-button (addWidget)="addWidget($event)"></add-widget-button>
 </div>

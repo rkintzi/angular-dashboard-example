@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Widget } from '../dashboard.service';
+import { Widget, DashboardService } from '../dashboard.service';
+
 
 @Component({
   selector: 'widgets-frame',
@@ -11,22 +12,35 @@ export class WidgetsFrameComponent implements OnInit {
 
     @Input() widget: Widget;
     editMode: boolean;
-    constructor() { }
+    newMode: boolean;
+    private config: any;
+    constructor(private service: DashboardService) { }
 
     ngOnInit() {
+        this.newMode = this.widget.config == undefined;
+        if (this.newMode) {
+            this.edit();
+        }
     }
 
-    edit(evt: Event) {
+    edit() {
+        this.config = {...this.widget.config};
         this.editMode = true;
-        evt.preventDefault();
     }
 
-    cancel(evt: Event) {
+    cancel() {
+        if (this.newMode) {
+            this.remove();
+        }
         this.editMode = false;
-        evt.preventDefault();
     }
 
-    remove(evt: Event) {
-        evt.preventDefault();
+    remove() {
+        this.service.remove(this.widget);
+    }
+
+    save(config: any) {
+        this.service.update(this.widget, config);
+        this.newMode = this.editMode = false;
     }
 }

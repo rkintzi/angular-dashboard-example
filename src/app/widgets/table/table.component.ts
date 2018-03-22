@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 export interface TableConfig {
-    table: string;
+    tableData: string;
 }
 
 @Component({

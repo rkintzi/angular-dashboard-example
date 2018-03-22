@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 export interface PieChartConfig {
-    pie_chart: string;
+    pieChartData: string;
 }
 @Component({
   selector: 'pie-chart',
