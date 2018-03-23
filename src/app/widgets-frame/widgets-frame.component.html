@@ -7,7 +7,6 @@
         <a btn (click)="cancel()">cancel</a>
     </div>
     <div class="content">
-    <ng-template widget></ng-template>
     <ng-container *ngIf="!editMode" [ngSwitch]="widget.type">
         <table-widget *ngSwitchCase="'table'" [config]="widget.config"></table-widget>
         <line-chart *ngSwitchCase="'line-chart'" [config]="widget.config"></line-chart>
