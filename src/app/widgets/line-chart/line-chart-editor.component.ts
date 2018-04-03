@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { LineChartConfig } from './line-chart.component';
-import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'line-chart-editor',
@@ -12,8 +11,6 @@ export class LineChartEditorComponent implements OnInit {
     @Input() config: LineChartConfig;
     @Output() save = new EventEmitter<LineChartConfig>();
     @Output() cancel = new EventEmitter<void>();
-
-    constructor(private service: DashboardService) { }
 
     ngOnInit() {
     }

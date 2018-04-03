@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Widget } from '../../dashboard.service';
 
 export class LineChartConfig {
     lineChartData: string;

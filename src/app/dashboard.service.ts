@@ -22,6 +22,10 @@ export class DashboardService {
     private subject: Subject<Dashboard>;
 
     constructor() {
+        this.subject = new ReplaySubject<Dashboard>(1);
+    }
+
+    fetchDashboard(): Observable<Dashboard> {
         this.widgets = [
             {
                 type: "pie-chart",
@@ -36,11 +40,8 @@ export class DashboardService {
                 config: {lineChartData: "LineChart"},
             }
         ];
-        this.subject = new ReplaySubject<Dashboard>(1);
         this.subject.next({ widgets: this.widgets.slice() });
-    }
 
-    fetchDashboard(): Observable<Dashboard> {
         return this.subject.asObservable();
     }
 
@@ -50,7 +51,7 @@ export class DashboardService {
             this.widgets.push(w);
         }
         w.config = { ...config};
-        this.subject.next({widgets: this.widgets.slice() });
+        //this.subject.next({widgets: this.widgets.slice() });
         return Observable.of();
     }
 
