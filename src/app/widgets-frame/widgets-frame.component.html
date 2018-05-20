@@ -8,30 +8,5 @@
     </div>
     <div class="content">
     <ng-template widget></ng-template>
-    <ng-container *ngIf="!editMode" [ngSwitch]="widget.type">
-        <table-widget *ngSwitchCase="'table'" [config]="widget.config"></table-widget>
-        <line-chart *ngSwitchCase="'line-chart'" [config]="widget.config"></line-chart>
-        <pie-chart *ngSwitchCase="'pie-chart'" [config]="widget.config"></pie-chart>
-    </ng-container>
-    <ng-container *ngIf="editMode" [ngSwitch]="widget.type">
-        <table-widget-editor 
-            *ngSwitchCase="'table'" 
-            [config]="config"
-            (save)="save($event)"
-            (cancel)="cancel()"
-        ></table-widget-editor>
-        <line-chart-editor 
-            *ngSwitchCase="'line-chart'" 
-            [config]="config"
-            (save)="save($event)"
-            (cancel)="cancel()"
-        ></line-chart-editor>
-        <pie-chart-editor
-            *ngSwitchCase="'pie-chart'"
-            [config]="config"
-            (save)="save($event)"
-            (cancel)="cancel()"
-        ></pie-chart-editor>
-    </ng-container>
     </div>
 </div>

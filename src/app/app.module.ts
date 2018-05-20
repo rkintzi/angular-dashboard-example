@@ -10,7 +10,8 @@ import { WidgetContentDirective } from './widgets-frame/widget-content.directive
 import { WidgetsModule } from './widgets/widgets.module';
 import { AddWidgetButtonComponent } from './add-widget-button/add-widget-button.component';
 import { ButtonDirective } from './button.directive';
-
+import { WidgetRegistryService } from './widget-registry.service';
+import './enabled-widget-plugins';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,7 @@ import { ButtonDirective } from './button.directive';
     BrowserModule,
     WidgetsModule,
   ],
-  providers: [DashboardService],
+  providers: [DashboardService, WidgetRegistryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

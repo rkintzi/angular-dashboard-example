@@ -13,6 +13,7 @@ import { TableEditorComponent } from './table/table-editor.component';
     CommonModule,
     FormsModule,
   ],
+  entryComponents: [PieChartComponent, LineChartComponent, TableComponent, PieChartEditorComponent, LineChartEditorComponent, TableEditorComponent],
   exports: [PieChartComponent, LineChartComponent, TableComponent, PieChartEditorComponent, LineChartEditorComponent, TableEditorComponent],
   declarations: [PieChartComponent, LineChartComponent, TableComponent, PieChartEditorComponent, LineChartEditorComponent, TableEditorComponent]
 })
