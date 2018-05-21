@@ -1,17 +1,18 @@
 import { Injectable, EventEmitter, Type } from '@angular/core';
 
 export interface ViewWidget {
-    config: any
+    config: any;
 }
 
 export interface EditWidget {
-    config: any
+    config: any;
     save: EventEmitter<any>;
     cancel: EventEmitter<void>;
 }
 
 export class WidgetDescriptor {
-    constructor(public type: string, public viewComponent: Type<ViewWidget>, public editComponent: Type<EditWidget>, public menuItemText: string) {}
+    constructor(public type: string, public viewComponent: Type<ViewWidget>,
+        public editComponent: Type<EditWidget>, public menuItemText: string) {}
 }
 
 export function registerWidgetDescriptor(d: WidgetDescriptor) {
@@ -24,26 +25,18 @@ export class WidgetRegistryService {
 
 
     constructor() { }
-    getViewWidget(type: string): Type<ViewWidget> {
-        let desc = WidgetRegistryService.widgets[type];
+    getDescriptor(type: string): WidgetDescriptor {
+        const desc = WidgetRegistryService.widgets[type];
         if (!desc) {
             return;
         }
-        return desc.viewComponent;
-    };
-    getEditWidget(type: string): Type<EditWidget> {
-        let desc = WidgetRegistryService.widgets[type];
-        if (!desc) {
-            return;
-        }
-        return desc.editComponent;
+        return desc;
     }
-    getMenuItemText(type: string): string {
-        let desc = WidgetRegistryService.widgets[type];
-        if (!desc) {
-            return;
+    getAll(): WidgetDescriptor[] {
+        const ds = [];
+        for (const type in WidgetRegistryService.widgets) {
+            ds.push(WidgetRegistryService.widgets[type]);
         }
-        return desc.menuItemText;
+        return ds;
     }
-
 }

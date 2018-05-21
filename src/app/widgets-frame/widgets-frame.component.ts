@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, ViewC
 
 import { Widget, DashboardService } from '../dashboard.service';
 import { WidgetContentDirective } from './widget-content.directive';
-import { WidgetRegistryService, EditWidget, ViewWidget } from '../widget-registry.service';
+import { WidgetRegistryService, WidgetDescriptor, EditWidget, ViewWidget} from '../widget-registry.service';
 
 @Component({
   selector: 'widgets-frame',
@@ -23,11 +23,12 @@ export class WidgetsFrameComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.newMode = this.widget.config == undefined;
+        this.newMode = this.widget.config === undefined;
         if (this.newMode) {
             this.edit();
+        } else {
+            this.loadComponent();
         }
-        this.loadComponent();
     }
 
     edit() {
@@ -51,27 +52,21 @@ export class WidgetsFrameComponent implements OnInit {
     save(config: any) {
         this.service.update(this.widget, config);
         this.newMode = this.editMode = false;
-        this.loadComponent();
     }
 
     loadComponent() {
-        let component: any;
-        if (this.editMode) {
-            component = this.registry.getEditWidget(this.widget.type);
-        } else {
-            component = this.registry.getViewWidget(this.widget.type);
-        }
-        if (!component) {
-            console.log("Unknown component for " + (this.edit ? "edit" : "view") + " for " + this.widget.type);
+        const descriptor = this.registry.getDescriptor(this.widget.type);
+        if (!descriptor) {
+            console.log('Unknow widget type: ' + this.widget.type);
             return;
         }
-
-        let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-
-        let viewContainerRef = this.widgetHost.viewContainerRef;
+        const component = this.editMode ? descriptor.editComponent : descriptor.viewComponent;
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
+        const viewContainerRef = this.widgetHost.viewContainerRef;
+        this.widgetHost.viewContainerRef.element.nativeElement.innerHTML = '';
         viewContainerRef.clear();
 
-        let componentRef = viewContainerRef.createComponent(componentFactory);
+        const componentRef = viewContainerRef.createComponent(componentFactory);
         if (this.editMode) {
             (<EditWidget>componentRef.instance).config = this.widget.config;
             (<EditWidget>componentRef.instance).save.subscribe(this.save);

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { WidgetRegistryService } from '../widget-registry.service';
 
 @Component({
   selector: 'add-widget-button',
@@ -12,21 +13,21 @@ export class AddWidgetButtonComponent implements OnInit {
     widgetsTypes: { name: string, type: string}[];
     showMenu: boolean;
 
-    constructor() {
-
-        this.widgetsTypes = [
-            { name: 'Pie Chart', type: 'pie-chart', },
-            { name: 'Table Widget', type: 'table', },
-            { name: 'Line Chart', type: 'line-chart', },
-        ];
+    constructor(registry: WidgetRegistryService) {
+        this.widgetsTypes = registry.getAll().map(d => (
+            { name: d.menuItemText, type: d.type }
+        ));
+        console.log(this.widgetsTypes);
     }
 
     ngOnInit() {
     }
+
     add(type: string) {
         this.addWidget.emit(type);
         this.showMenu = false;
     }
+
     toggleMenu() {
         this.showMenu = !this.showMenu;
     }

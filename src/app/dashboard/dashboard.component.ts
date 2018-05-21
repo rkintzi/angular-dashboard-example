@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        console.log(this.dashboard);
     }
 
     addWidget(type:string) {
