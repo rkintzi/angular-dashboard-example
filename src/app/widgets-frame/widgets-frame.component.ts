@@ -23,7 +23,7 @@ export class WidgetsFrameComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.newMode = this.widget.config === undefined;
+        this.newMode = this.widget.config == undefined;
         if (this.newMode) {
             this.edit();
         } else {
@@ -52,6 +52,7 @@ export class WidgetsFrameComponent implements OnInit {
     save(config: any) {
         this.service.update(this.widget, config);
         this.newMode = this.editMode = false;
+        this.loadComponent();
     }
 
     loadComponent() {
@@ -68,9 +69,9 @@ export class WidgetsFrameComponent implements OnInit {
 
         const componentRef = viewContainerRef.createComponent(componentFactory);
         if (this.editMode) {
-            (<EditWidget>componentRef.instance).config = this.widget.config;
-            (<EditWidget>componentRef.instance).save.subscribe(this.save);
-            (<EditWidget>componentRef.instance).cancel.subscribe(this.cancel);
+            (<EditWidget>componentRef.instance).config = this.widget.config || {};
+            (<EditWidget>componentRef.instance).save.subscribe((e)=>this.save(e));
+            (<EditWidget>componentRef.instance).cancel.subscribe(()=>this.cancel());
         } else {
             (<ViewWidget>componentRef.instance).config = this.widget.config;
         }
