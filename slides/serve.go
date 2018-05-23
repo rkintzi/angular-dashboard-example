@@ -1,7 +1,15 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"os"
+)
 
 func main() {
-	http.ListenAndServe(":8080", http.FileServer(http.Dir(".")))
+	err := http.ListenAndServe(":8080", http.FileServer(http.Dir(".")))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "%v", err)
+		os.Exit(1)
+	}
 }

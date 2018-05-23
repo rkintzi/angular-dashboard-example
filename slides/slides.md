@@ -1,7 +1,11 @@
 class:  middle
 
 # Dynamic components in Angular.io 
+When, how and why?
 
+<br>
+<br>
+<br>
 <br>
 <br>
 
@@ -10,6 +14,11 @@ class:  middle
 class:  middle
 
 # Dynamic components in Angular.io 
+When, how and why?
+<br>
+<br>
+<br>
+<br>
 
 **Radosław Kintzi**<br>
 @r_kintzi
@@ -23,13 +32,39 @@ class:  middle
 
 # Agenda 
 
-* When, how and why to use dynamic components
+* When it's worth to reach for dynamic components
+    
+* Example application (a dashboard)
+
+* Implementation with no dynamic components
+
+* Implementation using dynamic components
+
+
+---
+
+# Agenda 
+
+* When it's worth to reach for dynamic components
+    
+* Example application (a dashboard)
+
+* Implementation with no dynamic components
+
+* Implementation using dynamic components
+
+# &#172; Agenda
+
+* We won't cover dynamic components mechanics
+
 
 ---
 
 # Dynamic components 
 
-https://angular.io/guide/dynamic-component-loader
+Must read:
+
+* https://angular.io/guide/dynamic-component-loader
 
 ---
 
@@ -46,7 +81,7 @@ class:middle
 
 # Simple widget frame implementation
 
-`widget-frame.component.html`
+`widget-frame.component.html:`
 ```html
     <ng-container *ngIf="!editMode" [ngSwitch]="widget.type">
         <table-widget *ngSwitchCase="'table'" 
@@ -75,7 +110,7 @@ class:middle
 
 # Simple menu implementation
 
-`add-widget-button.component.ts`
+`add-widget-button.component.ts:`
 ```typescript
 @Component({
   selector: 'add-widget-button',
@@ -102,18 +137,28 @@ export class AddWidgetButtonComponent implements OnInit {
 
 ---
 
-# Naive implementation
+# Why/when this is a poor solution?
 
-To add a new widget to the system we need to:
+---
 
-* Implement a new component
+# Why/when this is a poor solution?
+
+What has to be done to add new kind of widget to the system?
+
+---
+
+# Why/when this is a poor solution?
+
+What has to be done to add new kind of widget to the system?
+
+* Implement a new components
 
 
 ---
 
-# Naive implementation
+# Why/when this is a poor solution?
 
-To add a new widget to the system we need to:
+What has to be done to add new kind of widget to the system?
 
 * Implement a new component
 
@@ -121,14 +166,11 @@ To add a new widget to the system we need to:
 
 * Update a menu
 
-* Update tests (for Menu and WidgetFrame components)
-
-
 ---
 
-# Naive implementation
+# Why/when this is a poor solution?
 
-To add a new widget to the system we need to:
+What has to be done to add new kind of widget to the system?
 
 * Implement a new component
 
@@ -136,11 +178,23 @@ To add a new widget to the system we need to:
 
 * Update a menu
 
-* Update tests (for Menu and WidgetFrame components)
+* Update tests (for menu and WidgetFrame components)
 
-<br>
 
-A nightmare of conflict resolution
+---
+
+# Why/when this is a poor solution?
+
+What if you need to implement two widgets at the same time?
+
+
+---
+
+# Why/when this is a poor solution?
+
+What if you need to implement two widgets at the same time?
+
+* Conflicts, conflicts, conflicts...
 
 
 ---
@@ -153,7 +207,7 @@ class:middle
 
 # Better menu implementation
 
-`add-widget-button.component.ts`
+`add-widget-button.component.ts:`
 ```typescript
 @Component({
   selector: 'add-widget-button',
@@ -167,10 +221,9 @@ export class AddWidgetButtonComponent implements OnInit {
     widgetsTypes: { name: string, type: string}[];
 
     constructor(registry: WidgetRegistryService) {
-        this.widgetsTypes = registry.getWidgetDescriptors().map(descriptor => (
+        this.widgetsTypes = registry.getAllDescriptors().map(descriptor => (
             { name: descriptor.menuItemText, type: descriptor.type }
         ));
-        console.log(this.widgetsTypes);
     }
         
     (...)
@@ -181,7 +234,7 @@ export class AddWidgetButtonComponent implements OnInit {
 
 # Better widget frame
 
-`widget-frame.component.ts`
+`widget-frame.component.ts:`
 ```typescripe
 loadComponent() {
     const descriptor = this.registry.getDescriptor(this.widget.type);
@@ -199,7 +252,7 @@ loadComponent() {
     }
 }
 ```
-`widget-frame.component.html`
+`widget-frame.component.html:`
 ```html
 <ng-template dynamic-component-host></ng-template>
 ```
@@ -240,25 +293,103 @@ export class WidgetRegistryService {
 ---
 # Registration
 
+
+`line-chart.descriptor.ts:`
 ```typescript
 registerWidgetDescriptor(new WidgetDescriptor(
     'line-chart', LineChartComponent, LineChartEditorComponent, 'Line Chart'));
+```
 
+
+<br>
+`pie-chart.descriptor.ts:`
+```typescript
 registerWidgetDescriptor(new WidgetDescriptor(
     'pie-chart', PieChartComponent, PieChartEditorComponent, 'Pie Chart'));
+```
+
+<br>
+`table.descriptor.ts:`
+```typescript
 
 registerWidgetDescriptor(new WidgetDescriptor(
     'table', TableComponent, TableEditorComponent, 'Table Widget'));
 ```
+
+---
+
+# Widget structure
+```
+widgets/pie-chart/
+├── pie-chart.component.css
+├── pie-chart.component.html
+├── pie-chart.component.spec.ts
+├── pie-chart.component.ts
+├── pie-chart-editor.component.css
+├── pie-chart-editor.component.html
+├── pie-chart-editor.component.spec.ts
+├── pie-chart-editor.component.ts
+└── pie-chart.descriptor.ts
+```
+
+---
+# Configuration
+
+`plugin-config.ts:`
+```typescript
+import './widgets/line-chart/line-chart.descriptor';
+import './widgets/pie-chart/pie-chart.descriptor';
+import './widgets/table/table.descriptor';
+```
+
 ---
 
 # Summary
 
-* Dynamic components are useful when you have to select a component at runtime
+When, how and why to use dynamic componets?
 
-* Should be used when the number of available options is not fixed and  change over time
+---
 
-* When used together with design patterns they improve code maintainability
+# Summary
+
+When, how and why to use dynamic componets?
+
+* When you have to select a component at runtime
+---
+
+# Summary
+
+When, how and why to use dynamic componets?
+
+* When you have to select a component at runtime
+
+* If the number of available options is not fixed and change over time
+
+---
+
+# Summary
+
+When, how and why to use dynamic componets?
+
+* When you have to select a component at runtime
+
+* If the number of available options is not fixed and change over time
+
+* Together with other design patterns 
+
+---
+
+# Summary
+
+When, how and why to use dynamic componets?
+
+* When you have to select a component at runtime
+
+* If the number of available options is not fixed and change over time
+
+* Together with other design patterns 
+
+* To improve code maintainability
 
 ---
 class:middle
