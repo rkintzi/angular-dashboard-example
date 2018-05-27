@@ -23,6 +23,6 @@ just read `slides/serve.go` and then:
 
 ```
 cd slides
-go run server.go
+go run serve.go
 ```
 
