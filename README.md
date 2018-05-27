@@ -1,27 +1,28 @@
-# Dashboard
+Demo aplication and slides for my talk at Angular Wrocław meetup (24.05.2018).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+There are two branches `naive` and `master` with two implementation of the
+application that where discussed.
 
-## Development server
+You can run the app localy at http://localhost:4200:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+$ npm install
+$ ./node_modules/.bin/ng serve
+```
 
-## Code scaffolding
+The slides (only available at `master` branch) can also be served localy
+at http://locahost:8080/ using:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+$ cd slides
+$ ./serve
+```
 
-## Build
+or if you don't trust the binary I provided (or you are on Mac or Windows)
+just read `slides/serve.go` and then:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```
+cd slides
+go run server.go
+```
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
