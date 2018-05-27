@@ -54,6 +54,19 @@ When, how and why?
 * Implementation using dynamic components
 
 # &#172; Agenda
+---
+
+# Agenda 
+
+* When it's worth to reach for dynamic components
+    
+* Example application (a dashboard)
+
+* Implementation with no dynamic components
+
+* Implementation using dynamic components
+
+# &#172; Agenda
 
 * We won't cover dynamic components mechanics
 
